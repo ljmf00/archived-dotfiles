@@ -1,10 +1,19 @@
 #!/usr/bin/env zsh
+# ┬   ┬┌┬┐┌─┐┌─┐┌─┐ | Oh My Zsh Theme - ljmf00
+# │   ││││├┤ │/││/│ | @author Luís Ferreira
+# ┴─┘└┘┴ ┴└  └─┘└─┘ | @license WTFPL 
 
 setopt promptsubst
 autoload -U add-zsh-hook
 
+function check_last_exit_code() {
+  local LAST_EXIT_CODE=$?
+  if [[ $LAST_EXIT_CODE -ne 0 ]]; then
+    echo "%{$fg_bold[red]%}$LAST_EXIT_CODE%{$reset_color%} "
+  fi
+}
 
-PROMPT='%{$fg_bold[cyan]%}%n%{$reset_color%} %{$fg_bold[green]%}%~%{$reset_color%}%{$reset_color%} %{$fg_bold[magenta]%}►%{$reset_color%} '
+PROMPT='%{$fg_bold[cyan]%}%n%{$reset_color%} %{$fg_bold[green]%}%~%{$reset_color%}%{$reset_color%} $(check_last_exit_code)%{$fg_bold[magenta]%}►%{$reset_color%} '
 RPROMPT='$(git_remote_status)$(git_prompt_info)$(git_prompt_status)'
 
 PROMPT2='%{$fg_bold[magenta]%}►%{$reset_color%} '
