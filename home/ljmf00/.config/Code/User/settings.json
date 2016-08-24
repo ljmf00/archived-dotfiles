@@ -1,0 +1,16 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+	"editor.fontSize": 16,
+	"editor.insertSpaces": false,
+	"editor.formatOnType": true,
+	"editor.tabCompletion": true,
+	"editor.cursorBlinking": "smooth",
+	"editor.mouseWheelZoom": true,
+	"editor.cursorStyle": "block",
+	"editor.fontLigatures": true,
+	"editor.renderWhitespace": true,
+	"editor.renderControlCharacters": true,
+	"editor.renderIndentGuides": true,
+	"telemetry.enableTelemetry": false,
+	"telemetry.enableCrashReporter": false
+}
