@@ -1,0 +1,4 @@
+#!/bin/bash
+
+sudo mhwd-gpu --setgl mesa
+sudo killall lightdm

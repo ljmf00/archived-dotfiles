@@ -1,0 +1,4 @@
+#!/bin/bash
+
+sudo mhwd-gpu --setgl nvidia
+sudo killall lightdm
