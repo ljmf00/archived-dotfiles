@@ -47,6 +47,7 @@ Install arch linux with ```base-devel``` package group.
 - *ttf-ms-fonts*
 - ttf-liberation
 - ttf-gentium
+- ttf-ubuntu-font-family
 
 #### Tools & Others
 - polkit
