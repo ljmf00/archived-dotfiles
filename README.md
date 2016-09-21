@@ -51,3 +51,4 @@ Install arch linux with ```base-devel``` package group.
 #### Tools & Others
 - polkit
 - virtualbox
+- *pamac-aur*
