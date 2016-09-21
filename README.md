@@ -53,3 +53,5 @@ Install arch linux with ```base-devel``` package group.
 - polkit
 - virtualbox
 - *pamac-aur*
+- gcc-multilib
+- *visual-studio-code*
