@@ -19,6 +19,8 @@ Install arch linux with ```base-devel``` package group.
 - *oh-my-zsh-git*
 
 #### Sound Management & Drivers
+- pulseaudio
+- alsa-pulseaudio
 - alsa-utils
 - alsa-firmware
 
@@ -41,5 +43,6 @@ Install arch linux with ```base-devel``` package group.
 - ttf-vista-fonts
 - ttf-monaco
 
-#### Tools
+#### Tools & Others
 - polkit
+- virtualbox
