@@ -36,4 +36,6 @@ Install arch linux with ```base-devel``` package group.
 ### Fonts
 - ttf-inconsolata
 - ttf-inconsolata-g
-- ttf-google-fonts-git
+- ttf-droid
+- ttf-vista-fonts
+- ttf-monaco
