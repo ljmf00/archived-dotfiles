@@ -37,8 +37,8 @@ Install arch linux with ```base-devel``` package group.
 - lxqt-policykit
 
 #### Fonts
-- ttf-inconsolata
-- ttf-inconsolata-g
+- *ttf-inconsolata*
+- *ttf-inconsolata-g*
 - ttf-droid
 - ttf-vista-fonts
 - ttf-monaco
