@@ -44,7 +44,7 @@ Install arch linux with ```base-devel``` package group.
 - ttf-monaco
 - ttf-dejavu
 - ttf-freefont
-- ttf-ms-fonts
+- *ttf-ms-fonts*
 - ttf-liberation
 - ttf-gentium
 
