@@ -35,6 +35,9 @@ Install arch linux with ```base-devel``` package group.
 - thunar
 - pcmanfm
 - lxqt-policykit
+- gimp
+- *pamac-aur*
+- *visual-studio-code*
 
 #### Fonts
 - ttf-inconsolata
@@ -52,6 +55,4 @@ Install arch linux with ```base-devel``` package group.
 #### Tools & Others
 - polkit
 - virtualbox
-- *pamac-aur*
 - gcc-multilib
-- *visual-studio-code*
