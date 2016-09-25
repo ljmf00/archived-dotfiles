@@ -48,3 +48,15 @@
 - polkit
 - virtualbox
 - gcc-multilib
+
+#### Filesystems & Mounting tools
+- ntfs-3g
+- gparted
+- udevil
+- udisks2
+- thunar-volman
+- mtpfs
+- sshfs
+- curlftpfs
+- sssd
+- autofs
