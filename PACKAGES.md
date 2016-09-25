@@ -60,3 +60,4 @@
 - curlftpfs
 - sssd
 - autofs
+- gvfs
