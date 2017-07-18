@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/ljmf00/.oh-my-zsh
+export ZSH=/home/ljmf00/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -83,8 +83,16 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+export USE_CCACHE=1
+export WITH_SU=true
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
+export WINEPREFIX=$HOME/.config/wine/
+export WINEARCH=win32
+
 echo " Welcome, "
 echo " ┬  ┌─┐┌─┐┌─┐┬─┐┬─┐┌─┐┬┬─┐┌─┐  "
 echo " │  └─┐├┤ ├┤ ├┬┘├┬┘├┤ │├┬┘├─┤  "
 echo " ┴─┘└─┘└  └─┘┴└─┴└─└─┘┴┴└─┴ ┴  "                                   
 echo " Last Session: $(last -1 -R $USER -n 1 | head -1 |cut -c 23-38)"
+
+export DISCORD_BETA_TOKEN=
