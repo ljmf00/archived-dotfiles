@@ -1,4 +1,4 @@
-// Place your settings in this file to overwrite default and user settings.
+// Place your settings in this file to overwrite the default settings
 {
 	"editor.fontSize": 16,
 	"editor.insertSpaces": false,
@@ -8,9 +8,12 @@
 	"editor.mouseWheelZoom": true,
 	"editor.cursorStyle": "block",
 	"editor.fontLigatures": true,
-	"editor.renderWhitespace": true,
+	"editor.renderWhitespace": "boundary",
 	"editor.renderControlCharacters": true,
 	"editor.renderIndentGuides": true,
 	"telemetry.enableTelemetry": false,
-	"telemetry.enableCrashReporter": false
+	"telemetry.enableCrashReporter": false,
+	"window.restoreFullscreen": true,
+	"window.menuBarVisibility": "toggle",
+	"workbench.colorTheme": "Monokai"
 }
