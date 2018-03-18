@@ -83,11 +83,14 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export USE_CCACHE=1
-export WITH_SU=true
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
-export WINEPREFIX=$HOME/.config/wine/
-export WINEARCH=win32
+autoload bashcompinit 
+bashcompinit
+
+source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+source ~/goto.bash
+eval $(thefuck --alias)
 
 echo " Welcome, "
 echo " ┬  ┌─┐┌─┐┌─┐┬─┐┬─┐┌─┐┬┬─┐┌─┐  "
@@ -95,11 +98,7 @@ echo " │  └─┐├┤ ├┤ ├┬┘├┬┘├┤ │├┬┘├─�
 echo " ┴─┘└─┘└  └─┘┴└─┴└─└─┘┴┴└─┴ ┴  "                                   
 echo " Last Session: $(last -1 -R $USER -n 1 | head -1 |cut -c 23-38)"
 
-export DISCORD_TOKEN=
-export YOUTUBE_DATA_API_KEY=
-export PGUSER=
-export PGDATABASE=
-export PGPASSWORD=
+export GPG_TTY=$(tty)
 
 #export DOCKER_HOST=tcp://127.0.0.1:32768
 
@@ -113,6 +112,13 @@ fi
 export VISUAL=nano
 export EDITOR="$VISUAL"
 
+export USE_CCACHE=1
+export WITH_SU=true
+
+export WINEPREFIX=$HOME/.config/wine/
+export WINEARCH=win32
+
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
 export _JAVA_AWT_WM_NONREPARTENTING=1
 
 IRONIC_WM_NAME="LG3D"
@@ -129,7 +135,11 @@ else
     xprop -root -f _NET_WM_NAME 8s -set _NET_WM_NAME "$IRONIC_WM_NAME"
 fi
 
-export GPG_TTY=$(tty)
+export DISCORD_TOKEN=
+export YOUTUBE_DATA_API_KEY=
+export PGUSER=
+export PGDATABASE=
+export PGPASSWORD=
 
 export TOR_KEYBLOB=
 
