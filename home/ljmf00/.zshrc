@@ -95,4 +95,45 @@ echo " │  └─┐├┤ ├┤ ├┬┘├┬┘├┤ │├┬┘├─�
 echo " ┴─┘└─┘└  └─┘┴└─┴└─└─┘┴┴└─┴ ┴  "                                   
 echo " Last Session: $(last -1 -R $USER -n 1 | head -1 |cut -c 23-38)"
 
-export DISCORD_BETA_TOKEN=
+export DISCORD_TOKEN=
+export YOUTUBE_DATA_API_KEY=
+export PGUSER=
+export PGDATABASE=
+export PGPASSWORD=
+
+#export DOCKER_HOST=tcp://127.0.0.1:32768
+
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    ssh-agent > ~/.ssh-agent-thing
+fi
+if [[ "$SSH_AGENT_PID" == "" ]]; then
+    eval "$(<~/.ssh-agent-thing)" > /dev/null
+fi
+
+export VISUAL=nano
+export EDITOR="$VISUAL"
+
+export _JAVA_AWT_WM_NONREPARTENTING=1
+
+IRONIC_WM_NAME="LG3D"
+NET_WIN=$(xprop -root _NET_SUPPORTING_WM_CHECK | awk -F "# " '{print $2}')
+
+if [[ "$NET_WIN" == 0x* ]]; then
+    # xprop cannot reliably set UTF8_STRING, so we replace as string.
+    # fortunately, jdk is OK with this, but wm-spec says use UTF8_STRING.
+    xprop -id "$NET_WIN" -remove _NET_WM_NAME
+    xprop -id "$NET_WIN" -f _NET_WM_NAME 8s -set _NET_WM_NAME "$IRONIC_WM_NAME"
+else
+    # even if we're not net compatible, do java workaround
+    xprop -root -remove _NET_WM_NAME
+    xprop -root -f _NET_WM_NAME 8s -set _NET_WM_NAME "$IRONIC_WM_NAME"
+fi
+
+export GPG_TTY=$(tty)
+
+export TOR_KEYBLOB=
+
+export SPOTIPY_CLIENT_ID=
+export SPOTIPY_CLIENT_SECRET=
+export SPOTIPY_REDIRECT_URI=
+export YOUTUBE_DEV_KEY=
