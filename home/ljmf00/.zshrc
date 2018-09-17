@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/home/ljmf00/.oh-my-zsh
+export ZSH=/home/luis/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -89,7 +89,7 @@ bashcompinit
 source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-source ~/goto.bash
+source ~/supershell.sh
 eval $(thefuck --alias)
 
 echo " Welcome, "
@@ -115,11 +115,20 @@ export EDITOR="$VISUAL"
 export USE_CCACHE=1
 export WITH_SU=true
 
-export WINEPREFIX=$HOME/.config/wine/
-export WINEARCH=win32
+export WINEPREFIX=$HOME/.wine
+export WINEARCH=win64
 
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
 export _JAVA_AWT_WM_NONREPARTENTING=1
+
+export ANDROID_HOME=/opt/android-sdk
+
+export USE_CCACHE=1
+export CCACHE_COMPRESS=1
+
+#ccache -M 50G
+
+setopt shwordsplit
 
 IRONIC_WM_NAME="LG3D"
 NET_WIN=$(xprop -root _NET_SUPPORTING_WM_CHECK | awk -F "# " '{print $2}')
@@ -135,15 +144,21 @@ else
     xprop -root -f _NET_WM_NAME 8s -set _NET_WM_NAME "$IRONIC_WM_NAME"
 fi
 
-export DISCORD_TOKEN=
-export YOUTUBE_DATA_API_KEY=
-export PGUSER=
-export PGDATABASE=
-export PGPASSWORD=
+export NO_AT_BRIDGE=1
 
-export TOR_KEYBLOB=
+#export DISCORD_TOKEN=
+#export DISCORD_TOKEN=
+#export UCHATIFY_DISCORD_TOKEN=
+#export YOUTUBE_DATA_API_KEY=
+#export PGUSER=
+#export PGDATABASE=
+#export PGPASSWORD=
 
-export SPOTIPY_CLIENT_ID=
-export SPOTIPY_CLIENT_SECRET=
-export SPOTIPY_REDIRECT_URI=
-export YOUTUBE_DEV_KEY=
+#export TOR_KEYBLOB=
+#export TOR_KEYBLOB=
+#export SEARCHFLIX_TOR_KEYBLOB=
+
+#export SPOTIPY_CLIENT_ID=
+#export SPOTIPY_CLIENT_SECRET=
+#export SPOTIPY_REDIRECT_URI=
+#export YOUTUBE_DEV_KEY=
