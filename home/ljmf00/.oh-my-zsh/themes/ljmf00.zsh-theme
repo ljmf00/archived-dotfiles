@@ -13,7 +13,7 @@ function check_last_exit_code() {
   fi
 }
 
-PROMPT='%{$fg_bold[cyan]%}%n%{$reset_color%} %{$fg_bold[green]%}%~%{$reset_color%}%{$reset_color%} $(check_last_exit_code)%{$fg_bold[magenta]%}►%{$reset_color%} '
+PROMPT='%{$fg_bold[cyan]%}%n@%m%{$reset_color%} %{$fg_bold[green]%}%~%{$reset_color%}%{$reset_color%} $(check_last_exit_code)%{$fg_bold[magenta]%}►%{$reset_color%} '
 RPROMPT='$(git_remote_status)$(git_prompt_info)$(git_prompt_status)'
 
 PROMPT2='%{$fg_bold[magenta]%}►%{$reset_color%} '
