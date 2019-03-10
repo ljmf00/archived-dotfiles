@@ -44,30 +44,17 @@ if [ -z ${SETUP_DEVICE+x} ]; then
     SETUP_DEVICE=/dev/sda
 fi
 
-sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk ${SETUP_DEVICE} -W always
-g
-n
-1
-
-+500M
-n
-2
-
--10G
-n
-3
-
-
-t
-1
-1
-t
-3
-19
-p
-w
-q
-EOF
+(
+echo "g"
+echo "n"; echo "1"; echo ""; echo "+500M"
+echo "n"; echo "2"; echo ""; echo "-10G"
+echo "n"; echo "3"; echo ""; echo ""
+echo "t"; echo "1"; echo "1"
+echo "t"; echo "3"; echo "19"
+echo "p"
+echo "w"
+echo "q"
+) | fdisk ${SETUP_DEVICE} -W always
 
 echo "Formating partitions..."
 mkfs.vfat -F 32 "${SETUP_DEVICE}1"
