@@ -36,83 +36,89 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /home/luis/.o
 echo "Updating pacman repositories..."
 pacman -Syyu --noconfirm
 
-PACKAGES="
-plasma
-kde-applications
-plasma-wayland-session
-lightdm
-conky
-dmenu
-filezilla
-git
-htop
-jre-openjdk
-libnotify
-python2
-python3
-qt5-base
-valgrind
-vim
-emacs
-virtualbox
-virtualbox-host-modules-arch
-vlc
-wine
-zsh
-thefuck
-xournal
-calligra
-krita
-libreoffice-fresh
-libreoffice-fresh-pt
-calibre
-texlive-most
-texlive-lang
-dlang
-i3-gaps
-i3lock
-gparted
-code
-vulkan-intel
-vulkan-devel
-xorg
-xorg-apps
-xorg-drivers
-xorg-fonts
-wayland
-lib32-virtualgl
-alsa-firmware
-alsa-oss
-alsa-utils
-pulseaudio
-bspwm
-sxhkd
-lxterminal
-gimp
-ttf-inconsolata
-ttf-droid
-ttf-dejavu
-ttf-freefont
-ttf-liberation
-ttf-gentium
-ttf-ubuntu-font-family
-noto-fonts
-noto-fonts-cjk
-noto-fonts-emoji
-ttf-croscore
-ttf-opensans
-ttf-roboto
-gparted
-ntfs-3g
-mtpfs
-sshfs
-ccache
-intellij-idea-community-edition
-eclipse-java
-arduino
-blender
-"
-
+if [ $SETUP_HOSTNAME -ne "dummy" ]; then
+    PACKAGES="
+    plasma
+    kde-applications
+    plasma-wayland-session
+    lightdm
+    conky
+    dmenu
+    filezilla
+    git
+    htop
+    jre-openjdk
+    libnotify
+    python2
+    python3
+    qt5-base
+    valgrind
+    vim
+    emacs
+    virtualbox
+    virtualbox-host-modules-arch
+    vlc
+    wine
+    zsh
+    thefuck
+    xournal
+    calligra
+    krita
+    libreoffice-fresh
+    libreoffice-fresh-pt
+    calibre
+    texlive-most
+    texlive-lang
+    dlang
+    i3-gaps
+    i3lock
+    gparted
+    code
+    vulkan-intel
+    vulkan-devel
+    xorg
+    xorg-apps
+    xorg-drivers
+    xorg-fonts
+    wayland
+    lib32-virtualgl
+    alsa-firmware
+    alsa-oss
+    alsa-utils
+    pulseaudio
+    bspwm
+    sxhkd
+    lxterminal
+    gimp
+    ttf-inconsolata
+    ttf-droid
+    ttf-dejavu
+    ttf-freefont
+    ttf-liberation
+    ttf-gentium
+    ttf-ubuntu-font-family
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+    ttf-croscore
+    ttf-opensans
+    ttf-roboto
+    gparted
+    ntfs-3g
+    mtpfs
+    sshfs
+    ccache
+    intellij-idea-community-edition
+    eclipse-java
+    arduino
+    blender
+    "
+else
+    PACKAGES="
+    lightdm
+    "
+fi
+    
 echo "Installing common packages..."
 LIST=$(echo $PACKAGES | tr -s '\n' ' ') # Replace newlines with spaces
 pacman -S ${LIST} --needed --noconfirm
@@ -124,20 +130,26 @@ sudo -u luis -n makepkg -sicf --needed --noconfirm
 rm -rfv ./yay*
 rm -rfv ./PKGBUILD
 
-AURPACKAGES="
-oh-my-zsh-git
-spotify
-scilab
-intellij-idea-ultimate-edition
-wps-office
-wps-office-mui-pt-pt
-wps-office-extension-portuguese-dictionary
-ttf-wps-fonts
-ttf-ms-fonts
-android-studio
-blender-benchmark
-osx-arc-shadow
-"
+if [ $SETUP_HOSTNAME -ne "dummy" ]; then
+    AURPACKAGES="
+    oh-my-zsh-git
+    spotify
+    scilab
+    intellij-idea-ultimate-edition
+    wps-office
+    wps-office-mui-pt-pt
+    wps-office-extension-portuguese-dictionary
+    ttf-wps-fonts
+    ttf-ms-fonts
+    android-studio
+    blender-benchmark
+    osx-arc-shadow
+    "
+else
+    AURPACKAGES="
+    spotify
+    "
+fi
 
 echo "Installing common AUR packages..."
 LIST=$(echo $AURPACKAGES | tr -s '\n' ' ')
