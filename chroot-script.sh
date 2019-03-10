@@ -21,8 +21,11 @@ passwd
 passwd luis
 
 echo "Installing grub..."
-pacman -S grub --noconfirm
-grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id="Arch Linux"
+if [ $SETUP_HOSTNAME -ne "dummy" ]; then
+    pacman -S grub os-prober efibootmgr --noconfirm
+    grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id="Arch Linux"
+else
+    pacman -S grub os-prober --noconfirm
+    grub-install --target=i386-pc $SETUP_DEVICE
+fi
 grub-mkconfig -o /boot/grub/grub.cfg
-
-echo -e "\nInstallation complete! Enjoy :)"

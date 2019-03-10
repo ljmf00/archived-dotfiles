@@ -44,28 +44,53 @@ if [ -z ${SETUP_DEVICE+x} ]; then
     SETUP_DEVICE=/dev/sda
 fi
 
-(
-echo "g"
-echo "n"; echo "1"; echo ""; echo "+500M"
-echo "n"; echo "2"; echo ""; echo "-10G"
-echo "n"; echo "3"; echo ""; echo ""
-echo "t"; echo "1"; echo "1"
-echo "t"; echo "3"; echo "19"
-echo "p"
-echo "w"
-echo "q"
-) | fdisk ${SETUP_DEVICE} -W always
+if [ $SETUP_HOSTNAME -ne "dummy" ]; then
+    (
+    echo "g"
+    echo "n"; echo "1"; echo ""; echo "+500M"
+    echo "n"; echo "2"; echo ""; echo "-10G"
+    echo "n"; echo "3"; echo ""; echo ""
+    echo "t"; echo "1"; echo "1"
+    echo "t"; echo "3"; echo "19"
+    echo "p"
+    echo "w"
+    echo "q"
+    ) | fdisk ${SETUP_DEVICE} -W always
+    
+    echo "Formating partitions..."
+    mkfs.vfat -F 32 "${SETUP_DEVICE}1"
+    mkfs.btrfs "${SETUP_DEVICE}2"
+    mkswap "${SETUP_DEVICE}3"
 
-echo "Formating partitions..."
-mkfs.vfat -F 32 "${SETUP_DEVICE}1"
-mkfs.btrfs "${SETUP_DEVICE}2"
-mkswap "${SETUP_DEVICE}3"
+    echo "Mouting the disk..."
+    mount "${SETUP_DEVICE}2" /mnt
+    mkdir -p /mnt/efi
+    mount "${SETUP_DEVICE}1" /mnt/efi
+    swapon "${SETUP_DEVICE}3"
+else
+    (
+    echo "o"
+    echo "n"; echo "p"; echo "1"; echo ""; echo "+500M"
+    echo "a"
+    echo "n"; echo "p"; echo "2"; echo ""; echo "-10G"
+    echo "n"; echo "p"; echo "3"; echo ""; echo ""
+    echo "t"; echo "3"; echo "19"
+    echo "p"
+    echo "w"
+    echo "q"
+    ) | fdisk ${SETUP_DEVICE} -W always
 
-echo "Mouting the disk..."
-mount "${SETUP_DEVICE}2" /mnt
-mkdir -p /mnt/efi
-mount "${SETUP_DEVICE}1" /mnt/efi
-swapon "${SETUP_DEVICE}3"
+    echo "Formating partitions..."
+    mkfs.ext2 "${SETUP_DEVICE}1"
+    mkfs.btrfs "${SETUP_DEVICE}2"
+    mkswap "${SETUP_DEVICE}3"
+
+    echo "Mouting the disk..."
+    mount "${SETUP_DEVICE}2" /mnt
+    mkdir -p /mnt/boot
+    mount "${SETUP_DEVICE}1" /mnt/boot
+    swapon "${SETUP_DEVICE}3"
+fi
 
 echo "Updating pacman mirrors..."
 echo -e "Server = http://192.168.1.80:8080/pub/archlinux/\$repo/os/\$arch\nServer = http://ftp.rnl.tecnico.ulisboa.pt/pub/archlinux/\$repo/os/\$arch\nServer = https://ftp.rnl.tecnico.ulisboa.pt/pub/archlinux/\$repo/os/\$arch\nServer = http://glua.ua.pt/pub/archlinux/\$repo/os/\$arch\nServer = https://glua.ua.pt/pub/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
@@ -77,6 +102,7 @@ echo "Generating fstab..."
 genfstab -U /mnt >> /mnt/etc/fstab
 
 export SETUP_HOSTNAME=$SETUP_HOSTNAME
+export SETUP_DEVICE=$SETUP_DEVICE
 
 echo "Updating system localization..."
 echo "en_US.UTF-8 UTF-8" > /mnt/etc/locale.gen
@@ -101,3 +127,6 @@ chmod +x /mnt/misc/chroot-script.sh
 
 echo "Change root into the new system"
 arch-chroot /mnt ./misc/chroot-script.sh
+
+umount -R /mnt
+echo -e "\nInstallation complete! Enjoy :)"
