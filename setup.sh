@@ -1,51 +1,24 @@
 #!/usr/bin/env bash
 
 #Greetings
-echo " Welcome, "
-echo " ┬  ┌─┐┌─┐┌─┐┬─┐┬─┐┌─┐┬┬─┐┌─┐  "
-echo " │  └─┐├┤ ├┤ ├┬┘├┬┘├┤ │├┬┘├─┤  "
-echo " ┴─┘└─┘└  └─┘┴└─┴└─└─┘┴┴└─┴ ┴  \n"
+echo -e " Welcome to installation script for Arch\n"
 
-echo "What do you want to do?\n"
-
-echo " 1. Full Arch installation"
-echo " 2. Update packages"
-echo " 3. Update dotfiles"
-
-#TODO: Create menu of options
-#TODO: Separate arch installation from other things
-
-echo "This is your dotfiles installation script. Please make sure you have:"
-echo " 1. A wired internet connection or wifi available"
-echo " 2. If you are installing this on a laptop, make sure you have enough baterry or plug the charger"
-echo " 3. You are on phobos, mars or deimos machines\n"
-
-echo "Have fun installing Arch Linux!\n"
-
-read -p "Press [Enter] key to start installation..."
-
-#TODO: Specify setup hostname in SETUP_HOSTNAME
+if [ `uname -n` -ne "archiso" ]; then
+    exit 1
+fi
 
 #Starting setup
-echo "Starting dotfiles setup..."
+echo "Starting arch setup..."
 
-if [ `id -u` -ne 0 ]; then
-    echo "This script must be run as root" 1>&2
-    exit 1
+if [ -z ${SETUP_HOSTNAME+x} ]; then
+    SETUP_HOSTNAME=dummy
 fi
 
 if [ `ls /sys/firmware/efi/efivars | wc -l` -gt 1 ]; then
     echo "Great, you are on a EFI system!"
-    USING_BIOS=0
 else
     echo "Hey, you are using BIOS!"
-    read -p "Are you sure? [Y/n]" -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]
-    then
-        echo "OK, installing as BIOS!"
-        USING_BIOS=1
-    else
+    if [ $SETUP_HOSTNAME -ne "dummy" ]; then
         exit 1
     fi
 fi
@@ -57,21 +30,58 @@ if ping -q -c 1 -W 1 8.8.8.8 >/dev/null; then
         echo "The network is up"
     else
         echo "The network is down"
-        wifi-menu
+        exit 1
     fi
 else
     echo "IPv4 is down"
-    wifi-menu
+    exit 1
 fi
 
 echo "Updating system clock..."
 timedatectl set-ntp true
 
-#TODO: Make partition system
+if [ -z ${SETUP_DEVICE+x} ]; then
+    SETUP_DEVICE=/dev/sda
+fi
+
+sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk ${SETUP_DEVICE} -W always
+g
+n
+1
+
++500M
+n
+2
+
+-10G
+n
+3
+
+
+t
+1
+1
+t
+3
+19
+p
+w
+q
+EOF
+
+echo "Formating partitions..."
+mkfs.vfat -F 32 "${SETUP_DEVICE}1"
+mkfs.btrfs "${SETUP_DEVICE}2"
+mkswap "${SETUP_DEVICE}3"
+
+echo "Mouting the disk..."
+mount "${SETUP_DEVICE}2" /mnt
+mkdir -p /mnt/efi
+mount "${SETUP_DEVICE}1" /mnt/efi
+swapon "${SETUP_DEVICE}3"
 
 echo "Updating pacman mirrors..."
-#TODO: Add more portugal mirrors
-echo "Server = http://ftp.rnl.tecnico.ulisboa.pt/pub/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
+echo -e "Server = http://192.168.1.80:8080/pub/archlinux/\$repo/os/\$arch\nServer = http://ftp.rnl.tecnico.ulisboa.pt/pub/archlinux/\$repo/os/\$arch\nServer = https://ftp.rnl.tecnico.ulisboa.pt/pub/archlinux/\$repo/os/\$arch\nServer = http://glua.ua.pt/pub/archlinux/\$repo/os/\$arch\nServer = https://glua.ua.pt/pub/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
 
 echo "Installing the base system..."
 pacstrap /mnt base base-devel btrfs-progs
@@ -79,90 +89,28 @@ pacstrap /mnt base base-devel btrfs-progs
 echo "Generating fstab..."
 genfstab -U /mnt >> /mnt/etc/fstab
 
-echo "Change root into the new system"
-arch-chroot /mnt
-
-echo "Setting the timezone..."
-ln -sf /usr/share/zoneinfo/Europe/Lisbon /etc/localtime
-
-echo "Ajust time with hardware clock"
-hwclock --systohc
+export SETUP_HOSTNAME=$SETUP_HOSTNAME
 
 echo "Updating system localization..."
-echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
-locale-gen
-echo "LANG=en_US.UTF-8" > /etc/locale.conf
+echo "en_US.UTF-8 UTF-8" > /mnt/etc/locale.gen
+echo "LANG=en_US.UTF-8" > /mnt/etc/locale.conf
 
 echo "Setting the hostname..."
-echo "$SETUP_HOSTNAME" > /etc/hostname
+echo "$SETUP_HOSTNAME" > /mnt/etc/hostname
 
 echo "Setting hosts..."
-echo "127.0.0.1\tlocalhost" > /etc/hosts
-echo "::1\t\tlocalhost" >> /etc/hosts
-echo "127.0.1.1\t$SETUP_HOSTNAME.localdomain\t$SETUP_HOSTNAME" >> /etc/hosts
+echo "127.0.0.1\tlocalhost" > /mnt/etc/hosts
+echo "::1\t\tlocalhost" >> /mnt/etc/hosts
+echo "127.0.1.1\t$SETUP_HOSTNAME.localdomain\t$SETUP_HOSTNAME" >> /mnt/etc/hosts
 
-mkinitcpio -p linux
+mkdir -p /mnt/misc/
 
-#TODO: Setting up the root password
-
-echo "Creating user"
-
-
-echo "Add support for multilib..."
-echo -e "[multilib]\nInclude = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
-
-echo "Updating pacman repositories..."
-pacman -Syyu --noconfirm
-
-PACKAGES="
-plasma
-kde-applications
-plasma-wayland-session
-lightdm
-conky
-dmenu
-filezilla
-git
-htop
-jre7-openjdk
-jre8-openjdk
-libnotify
-python2
-python3
-qt5-base
-valgrind
-vim
-emacs
-virtualbox
-vlc
-wine
-zsh
-thefuck
-xournal
-calligra
-krita
-libreoffice-fresh
-libreoffice-fresh-pt
-calibre
-texlive-most
-texlive-lang
-dlang
-i3
-gnome
-gnome-extra
-deepin
-deepin-extra
-"
-
-LIST=$(echo $PACKAGES | tr -s '\n' ' ') # Replace newlines with spaces
-pacman -S ${LIST} --noconfirm
-
-
-if [[ "$(hostname)" == "phobos" || "$(hostname)" == "deimos" ]]; then
-    cp -rf ./common/wallpapers /home/luis/
-else
-    # comandos de máquina desktop ou servidor
+if [ -z ${SETUP_WEBREMOTE+x} ]; then
+    SETUP_WEBREMOTE="https://gitlab.com/lsferreira/dotfiles/raw/master"
 fi
 
-echo "Updating font cache..."
-fc-cache -vf
+curl "$SETUP_WEBREMOTE/chroot-script.sh" > /mnt/misc/chroot-script.sh
+chmod +x /mnt/misc/chroot-script.sh
+
+echo "Change root into the new system"
+arch-chroot /mnt ./misc/chroot-script.sh
