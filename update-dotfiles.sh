@@ -7,8 +7,31 @@ if [ `id -u` -ne 0 ]; then
     exit 1
 fi
 
-echo "Add support for multilib..."
-echo -e "[multilib]\nInclude = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
+echo "Add wallpapers"
+cp -rf ./common/wallpapers/ /home/luis/
+
+echo "Add git config..."
+cp -rf ./common/configs/git/.gitconfig /home/luis/
+
+echo "Add emacs configs..."
+cp -rf ./common/configs/emacs/.emacs.d/ /home/luis/
+cp -rf ./common/configs/emacs/.emacs /home/luis/
+
+echo "Add gimp configs..."
+cp -rf ./common/configs/gimp/.gimp-2.8/ /home/luis/
+
+echo "Configure package manager..."
+cp -rf ./common/configs/pacman/mirrorlist /etc/pacman.d/
+cp -rf ./common/configs/pacman/pacman.conf /etc/
+
+echo "Configure zsh..."
+mkdir -p /usr/share/oh-my-zsh/themes/
+cp -rf ./common/configs/zsh/oh-my-zsh/themes/ljmf00.zsh-theme /usr/share/oh-my-zsh/themes/
+cp -rf ./common/configs/zsh/.zshrc /home/luis/
+curl https://gitlab.com/aurorafossorg/utils/supershell/raw/master/supershell.sh > /home/luis/supershell.sh
+mkdir -p /home/luis/.oh-my-zsh/custom/plugins/
+git clone https://github.com/zsh-users/zsh-autosuggestions.git /home/luis/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /home/luis/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
 echo "Updating pacman repositories..."
 pacman -Syyu --noconfirm
@@ -23,8 +46,7 @@ dmenu
 filezilla
 git
 htop
-jre7-openjdk
-jre8-openjdk
+jre-openjdk
 libnotify
 python2
 python3
@@ -33,6 +55,7 @@ valgrind
 vim
 emacs
 virtualbox
+virtualbox-host-modules-arch
 vlc
 wine
 zsh
@@ -46,22 +69,89 @@ calibre
 texlive-most
 texlive-lang
 dlang
-i3
-gnome
-gnome-extra
-deepin
-deepin-extra
+i3-gaps
+i3lock
+gparted
+code
+vulkan-intel
+vulkan-devel
+xorg
+xorg-apps
+xorg-drivers
+xorg-fonts
+wayland
+lib32-virtualgl
+alsa-firmware
+alsa-oss
+alsa-utils
+pulseaudio
+bspwm
+sxhkd
+lxterminal
+gimp
+ttf-inconsolata
+ttf-droid
+ttf-dejavu
+ttf-freefont
+ttf-liberation
+ttf-gentium
+ttf-ubuntu-font-family
+noto-fonts
+noto-fonts-cjk
+noto-fonts-emoji
+ttf-croscore
+ttf-opensans
+ttf-roboto
+gparted
+ntfs-3g
+mtpfs
+sshfs
+ccache
+intellij-idea-community-edition
+eclipse-java
+arduino
+blender
 "
 
+echo "Installing common packages..."
 LIST=$(echo $PACKAGES | tr -s '\n' ' ') # Replace newlines with spaces
-pacman -S ${LIST} --noconfirm
+pacman -S ${LIST} --needed --noconfirm
 
+echo "Installing yay..."
+sudo -u luis bash -c "curl https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=yay > ./PKGBUILD"
+sudo -u luis -n makepkg -sicf --needed --noconfirm
+
+rm -rf ./yay*
+rm -rf ./PKGBUILD
+
+AURPACKAGES="
+oh-my-zsh-git
+spotify
+scilab
+intellij-idea-ultimate-edition
+wps-office
+wps-office-mui-pt-pt
+wps-office-extension-portuguese-dictionary
+ttf-wps-fonts
+ttf-ms-fonts
+android-studio
+blender-benchmark
+osx-arc-shadow
+"
+
+echo "Installing common AUR packages..."
+LIST=$(echo $AURPACKAGES | tr -s '\n' ' ')
+sudo -u luis yay -S ${LIST} --needed --noconfirm
 
 if [[ "$(hostname)" == "phobos" || "$(hostname)" == "deimos" ]]; then
-    cp -rf ./common/wallpapers /home/luis/
+    echo "Installing laptop specific..."
 else
-    # comandos de máquina desktop ou servidor
+    echo "Installing desktop specific..."
+    pacman -S nvidia nvidia-utils nvidia-settings lib32-nvidia-utils --needed --noconfirm
 fi
 
 echo "Updating font cache..."
 fc-cache -vf
+
+echo "Update permissions..."
+chown luis:wheel -R /home/luis/

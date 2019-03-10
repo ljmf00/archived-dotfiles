@@ -17,17 +17,29 @@ echo "Creating user"
 useradd -G wheel -m luis
 
 echo "Changing passwords..."
-passwd
-passwd luis
+echo changeme | passwd root --stdin
+echo changeme | passwd luis --stdin
 
 echo "Installing grub..."
+pacman -S grub os-prober intel-ucode --noconfirm
 if [ $SETUP_HOSTNAME -ne "dummy" ]; then
-    pacman -S grub os-prober efibootmgr --noconfirm
+    pacman -S efibootmgr --noconfirm
     grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id="Arch Linux"
 else
-    pacman -S grub os-prober --noconfirm
     grub-install --target=i386-pc $SETUP_DEVICE
 fi
 grub-mkconfig -o /boot/grub/grub.cfg
+
+pacman -S git --noconfirm
+
+git clone https://gitlab.com/lsferreira/dotfiles /misc/dotfiles/
+
+chmod +x /misc/dotfiles/update-dotfiles.sh
+
+pushd /misc/dotfiles/
+/misc/dotfiles/update-dotfiles.sh
+popd
+
+rm -rf /misc/
 
 exit

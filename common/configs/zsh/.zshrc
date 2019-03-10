@@ -6,7 +6,7 @@ echo " ┴─┘└─┘└  └─┘┴└─┴└─└─┘┴┴└─�
 echo " Last Session: $(last -1 -R $USER -n 1 | head -1 |cut -c 23-38)"
 
 # Path to your oh-my-zsh installation.
-export ZSH=/home/luis/.oh-my-zsh
+export ZSH=/usr/share/oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -72,7 +72,7 @@ source $ZSH/oh-my-zsh.sh
 if [[ -n $SSH_CONNECTION ]]; then
     export EDITOR='nano'
 else
-    export EDITOR='nano'
+    export EDITOR='emacs'
 fi
 
 # Compilation flags
@@ -110,8 +110,7 @@ if [[ "$SSH_AGENT_PID" == "" ]]; then
     eval "$(<~/.ssh-agent-thing)" > /dev/null
 fi
 
-export VISUAL=nano
-export EDITOR="$VISUAL"
+export VISUAL='nano'
 
 export USE_CCACHE=1
 export WITH_SU=true
@@ -146,20 +145,3 @@ setopt shwordsplit
 #fi
 
 #export NO_AT_BRIDGE=1
-
-#export DISCORD_TOKEN=
-#export DISCORD_TOKEN=
-#export UCHATIFY_DISCORD_TOKEN=
-#export YOUTUBE_DATA_API_KEY=
-#export PGUSER=
-#export PGDATABASE=
-#export PGPASSWORD=
-
-#export TOR_KEYBLOB=
-#export TOR_KEYBLOB=
-#export SEARCHFLIX_TOR_KEYBLOB=
-
-#export SPOTIPY_CLIENT_ID=
-#export SPOTIPY_CLIENT_SECRET=
-#export SPOTIPY_REDIRECT_URI=
-#export YOUTUBE_DEV_KEY=
