@@ -29,3 +29,5 @@ else
     grub-install --target=i386-pc $SETUP_DEVICE
 fi
 grub-mkconfig -o /boot/grub/grub.cfg
+
+exit
