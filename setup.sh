@@ -93,7 +93,7 @@ else
 fi
 
 echo "Updating pacman mirrors..."
-echo -e "Server = http://192.168.1.80:8080/pub/archlinux/\$repo/os/\$arch\nServer = http://ftp.rnl.tecnico.ulisboa.pt/pub/archlinux/\$repo/os/\$arch\nServer = https://ftp.rnl.tecnico.ulisboa.pt/pub/archlinux/\$repo/os/\$arch\nServer = http://glua.ua.pt/pub/archlinux/\$repo/os/\$arch\nServer = https://glua.ua.pt/pub/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
+echo -e "#Server = http://192.168.1.80:8080/pub/archlinux/\$repo/os/\$arch\nServer = http://ftp.rnl.tecnico.ulisboa.pt/pub/archlinux/\$repo/os/\$arch\nServer = https://ftp.rnl.tecnico.ulisboa.pt/pub/archlinux/\$repo/os/\$arch\nServer = http://glua.ua.pt/pub/archlinux/\$repo/os/\$arch\nServer = https://glua.ua.pt/pub/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
 
 echo "Installing the base system..."
 pacstrap /mnt base base-devel btrfs-progs
