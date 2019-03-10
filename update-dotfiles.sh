@@ -8,26 +8,26 @@ if [ `id -u` -ne 0 ]; then
 fi
 
 echo "Add wallpapers"
-cp -rf ./common/wallpapers/ /home/luis/
+cp -rfv ./common/wallpapers/ /home/luis/
 
 echo "Add git config..."
-cp -rf ./common/configs/git/.gitconfig /home/luis/
+cp -rfv ./common/configs/git/.gitconfig /home/luis/
 
 echo "Add emacs configs..."
-cp -rf ./common/configs/emacs/.emacs.d/ /home/luis/
-cp -rf ./common/configs/emacs/.emacs /home/luis/
+cp -rfv ./common/configs/emacs/.emacs.d/ /home/luis/
+cp -rfv ./common/configs/emacs/.emacs /home/luis/
 
 echo "Add gimp configs..."
-cp -rf ./common/configs/gimp/.gimp-2.8/ /home/luis/
+cp -rfv ./common/configs/gimp/.gimp-2.8/ /home/luis/
 
 echo "Configure package manager..."
-cp -rf ./common/configs/pacman/mirrorlist /etc/pacman.d/
-cp -rf ./common/configs/pacman/pacman.conf /etc/
+cp -rfv ./common/configs/pacman/mirrorlist /etc/pacman.d/
+cp -rfv ./common/configs/pacman/pacman.conf /etc/
 
 echo "Configure zsh..."
 mkdir -p /usr/share/oh-my-zsh/themes/
-cp -rf ./common/configs/zsh/oh-my-zsh/themes/ljmf00.zsh-theme /usr/share/oh-my-zsh/themes/
-cp -rf ./common/configs/zsh/.zshrc /home/luis/
+cp -rfv ./common/configs/zsh/oh-my-zsh/themes/ljmf00.zsh-theme /usr/share/oh-my-zsh/themes/
+cp -rfv ./common/configs/zsh/.zshrc /home/luis/
 curl https://gitlab.com/aurorafossorg/utils/supershell/raw/master/supershell.sh > /home/luis/supershell.sh
 mkdir -p /home/luis/.oh-my-zsh/custom/plugins/
 git clone https://github.com/zsh-users/zsh-autosuggestions.git /home/luis/.oh-my-zsh/custom/plugins/zsh-autosuggestions
@@ -121,8 +121,8 @@ echo "Installing yay..."
 sudo -u luis bash -c "curl https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=yay > ./PKGBUILD"
 sudo -u luis -n makepkg -sicf --needed --noconfirm
 
-rm -rf ./yay*
-rm -rf ./PKGBUILD
+rm -rfv ./yay*
+rm -rfv ./PKGBUILD
 
 AURPACKAGES="
 oh-my-zsh-git
@@ -154,4 +154,4 @@ echo "Updating font cache..."
 fc-cache -vf
 
 echo "Update permissions..."
-chown luis:wheel -R /home/luis/
+chown luis:wheel -Rv /home/luis/

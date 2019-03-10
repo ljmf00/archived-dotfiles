@@ -36,10 +36,12 @@ git clone https://gitlab.com/lsferreira/dotfiles /misc/dotfiles/
 
 chmod +x /misc/dotfiles/update-dotfiles.sh
 
+chown luis:luis -Rv /misc/
+
 pushd /misc/dotfiles/
 /misc/dotfiles/update-dotfiles.sh
 popd
 
-rm -rf /misc/
+rm -rfv /misc/
 
 exit
