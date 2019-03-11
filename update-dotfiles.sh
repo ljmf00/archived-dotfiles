@@ -116,12 +116,25 @@ if [ $SETUP_HOSTNAME -ne "dummy" ]; then
 else
     PACKAGES="
     lightdm
+    plasma
+    kde-applications
+    plasma-wayland-session
+    ttf-droid
+    ttf-dejavu
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+    git
     "
 fi
     
 echo "Installing common packages..."
 LIST=$(echo $PACKAGES | tr -s '\n' ' ') # Replace newlines with spaces
 pacman -S ${LIST} --needed --noconfirm
+
+echo "Create temporary permissions for sudo..."
+cp -f /etc/sudoers /etc/sudoers.bak
+echo "luis ALL = NOPASSWD : ALL" >> /etc/sudoers
 
 echo "Installing yay..."
 sudo -u luis bash -c "curl https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=yay > ./PKGBUILD"
@@ -130,6 +143,7 @@ sudo -u luis -n makepkg -sicf --needed --noconfirm
 rm -rfv ./yay*
 rm -rfv ./PKGBUILD
 
+#TODO: Change not equal to for bash compatible expression
 if [ $SETUP_HOSTNAME -ne "dummy" ]; then
     AURPACKAGES="
     oh-my-zsh-git
@@ -147,13 +161,18 @@ if [ $SETUP_HOSTNAME -ne "dummy" ]; then
     "
 else
     AURPACKAGES="
-    spotify
+    oh-my-zsh-git
+    osx-arc-shadow
     "
 fi
 
 echo "Installing common AUR packages..."
 LIST=$(echo $AURPACKAGES | tr -s '\n' ' ')
 sudo -u luis yay -S ${LIST} --needed --noconfirm
+
+echo "Restructure sudo permissions..."
+mv -f /etc/sudoers.bak /etc/sudoers
+echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
 
 if [[ "$(hostname)" == "phobos" || "$(hostname)" == "deimos" ]]; then
     echo "Installing laptop specific..."

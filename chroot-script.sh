@@ -17,8 +17,8 @@ echo "Creating user"
 useradd -G wheel -m luis
 
 echo "Changing passwords..."
-echo changeme | passwd root --stdin
-echo changeme | passwd luis --stdin
+echo -e "changeme\nchangeme" | passwd root
+echo -e "changeme\nchangeme" | passwd luis
 
 echo "Installing grub..."
 pacman -S grub os-prober intel-ucode --noconfirm

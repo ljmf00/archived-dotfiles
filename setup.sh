@@ -125,6 +125,12 @@ fi
 curl "$SETUP_WEBREMOTE/chroot-script.sh" > /mnt/misc/chroot-script.sh
 chmod +x /mnt/misc/chroot-script.sh
 
+if [ -z ${SETUP_PRIVATE+x} ]; then
+    SETUP_PRIVATE=0
+fi
+
+export SETUP_PRIVATE=$SETUP_PRIVATE
+
 echo "Change root into the new system"
 arch-chroot /mnt ./misc/chroot-script.sh
 
