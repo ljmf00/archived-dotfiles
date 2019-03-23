@@ -8,6 +8,7 @@ fi
 if [ -z ${SETUP_PRIVATE+x} ]; then
 	SETUP_PRIVATE=0
 fi
+# TODO: Add the private part
 
 if [ -z ${SETUP_VERBOSE+x} ]; then
 	SETUP_VERBOSE=0
