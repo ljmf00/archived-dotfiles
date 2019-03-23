@@ -1,9 +1,9 @@
 # Greetings
-echo " Welcome, "
-echo " ┬  ┌─┐┌─┐┌─┐┬─┐┬─┐┌─┐┬┬─┐┌─┐  "
-echo " │  └─┐├┤ ├┤ ├┬┘├┬┘├┤ │├┬┘├─┤  "
-echo " ┴─┘└─┘└  └─┘┴└─┴└─└─┘┴┴└─┴ ┴  "                                   
-echo " Last Session: $(last -1 -R $USER -n 1 | head -1 |cut -c 23-38)"
+echo -e " Welcome, "
+echo -e " ┬  ┌─┐┌─┐┌─┐┬─┐┬─┐┌─┐┬┬─┐┌─┐  "
+echo -e " │  └─┐├┤ ├┤ ├┬┘├┬┘├┤ │├┬┘├─┤  "
+echo -e " ┴─┘└─┘└  └─┘┴└─┴└─└─┘┴┴└─┴ ┴  "                                   
+echo -e " Last Session: $(last -1 -R $USER -n 1 | head -1 |cut -c 23-38)"
 
 # Path to your oh-my-zsh installation.
 export ZSH=/usr/share/oh-my-zsh
@@ -34,7 +34,7 @@ ZSH_THEME="ljmf00"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"

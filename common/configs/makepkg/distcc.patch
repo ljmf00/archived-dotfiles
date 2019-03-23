@@ -1,0 +1,36 @@
+--- makepkg_a.conf	2019-03-23 11:28:06.139984984 +0000
++++ makepkg_b.conf	2019-03-23 11:33:45.966620939 +0000
+@@ -37,14 +37,14 @@
+ 
+ #-- Compiler and Linker Flags
+ CPPFLAGS="-D_FORTIFY_SOURCE=2"
+-CFLAGS="-march=native -O2 -pipe -fno-plt"
+-CXXFLAGS="-march=native -O2 -pipe -fno-plt"
+-#CFLAGS="-march=x86-64 -mtune=generic -O2 -pipe -fno-plt"
+-#CXXFLAGS="-march=x86-64 -mtune=generic -O2 -pipe -fno-plt"
++#CFLAGS="-march=native -O2 -pipe -fno-plt"
++#CXXFLAGS="-march=native -O2 -pipe -fno-plt"
++CFLAGS="-march=x86-64 -mtune=generic -O2 -pipe -fno-plt"
++CXXFLAGS="-march=x86-64 -mtune=generic -O2 -pipe -fno-plt"
+ LDFLAGS="-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now"
+ #-- Make Flags: change this for DistCC/SMP systems
+-MAKEFLAGS="-j$(nproc)"
+-#MAKEFLAGS="-j32"
++#MAKEFLAGS="-j$(nproc)"
++MAKEFLAGS="-j32"
+ #-- Debugging flags
+ DEBUG_CFLAGS="-g -fvar-tracking-assignments"
+ DEBUG_CXXFLAGS="-g -fvar-tracking-assignments"
+@@ -63,9 +63,9 @@
+ #-- check:    Run the check() function if present in the PKGBUILD
+ #-- sign:     Generate PGP signature file
+ #
+-BUILDENV=(!distcc color ccache check !sign)
+-#BUILDENV=(distcc fakeroot color !ccache check !sign)
+-#DISTCC_HOSTS="192.168.1.80,lzo,cpp 192.168.1.103,lzo,cpp"
++#BUILDENV=(!distcc color ccache check !sign)
++BUILDENV=(distcc fakeroot color !ccache check !sign)
++DISTCC_HOSTS="192.168.1.80,lzo,cpp 192.168.1.103,lzo,cpp"
+ 
+ #
+ #-- If using DistCC, your MAKEFLAGS will also need modification. In addition,

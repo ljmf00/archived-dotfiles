@@ -1,5 +1,24 @@
 #!/usr/bin/env bash
 
+# Exit on the first error
+if [ "$SETUP_ALLOWERROR" = '0' ]; then
+    set -e
+fi
+
+# Variable initialization in case of no setup
+if [ -z ${SETUP_INSTALLATION+x} ]; then
+    SETUP_INSTALLATION=0
+fi
+
+# Greetings
+echo -e "\e[95m-->\e[0m \e[1mWelcome to chroot installation script\e[0m"
+
+# Check if the script is running inside setup script
+if [ "$SETUP_INSTALLATION" -ne 1 ]; then
+    echo -e "\e[91m==>\e[0m \e[1mThis script must be run with setup script\e[0m" 1>&2
+    exit 1
+fi
+
 echo -e "Welcome to your clean chroot!\n"
 
 echo "Setting the timezone..."
