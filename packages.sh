@@ -174,8 +174,8 @@ PACKAGES+="
 AURPACKAGES+="
 	spotify
 	blockify
+	musixmatch-bin
 "
-#musixmatch-bin
 
 # Add common filesystem support packages
 PACKAGES+="
