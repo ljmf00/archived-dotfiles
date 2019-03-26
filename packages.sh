@@ -54,6 +54,7 @@ PACKAGES+="
 	ttf-croscore
 	ttf-opensans
 	ttf-roboto
+	nerd-fonts-complete
 "
 AURPACKAGES+="
 	ttf-wps-fonts
@@ -68,6 +69,7 @@ PACKAGES+="
 # Add common text editors
 PACKAGES+="
 	vim
+	neovim
 	emacs
 	code
 "
