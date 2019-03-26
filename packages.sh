@@ -75,9 +75,6 @@ PACKAGES+="
 	emacs
 	code
 "
-AURPACKAGES+="
-    ycmd-git
-"
 
 # Add common office software
 PACKAGES+="
