@@ -54,11 +54,11 @@ PACKAGES+="
 	ttf-croscore
 	ttf-opensans
 	ttf-roboto
-	nerd-fonts-complete
 "
 AURPACKAGES+="
 	ttf-wps-fonts
 	ttf-ms-fonts
+	nerd-fonts-complete
 "
 
 # Add common apps
@@ -70,8 +70,13 @@ PACKAGES+="
 PACKAGES+="
 	vim
 	neovim
+	neovim-qt
+	python-neovim
 	emacs
 	code
+"
+AURPACKAGES+="
+    ycmd-git
 "
 
 # Add common office software
