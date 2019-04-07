@@ -133,11 +133,11 @@ bash -c "curl https://gitlab.com/aurorafossorg/utils/supershell/raw/master/super
 echo -e "\e[92m-->\e[0m \e[1mInstalling zsh plugins...\e[0m"
 $SETUP_MKDIR -p /home/luis/.oh-my-zsh/custom/plugins/ > $SETUP_OUTPUT_DESCRIPTOR
 
-echo -e "\e[92m-->\e[0m \e[1mScan remote ssh keys for git cloning...\e[0m"
-$SETUP_MKDIR -p /home/luis/.ssh/
-touch /home/luis/.ssh/known_hosts
-if [ ! -n "$(grep "^github.com " /home/luis/.ssh/known_hosts)" ]; then ssh-keyscan github.com >> /home/luis/.ssh/known_hosts 2>/dev/null; fi
-if [ ! -n "$(grep "^gitlab.com " /home/luis/.ssh/known_hosts)" ]; then ssh-keyscan gitlab.com >> /home/luis/.ssh/known_hosts 2>/dev/null; fi
+#echo -e "\e[92m-->\e[0m \e[1mScan remote ssh keys for git cloning...\e[0m"
+#$SETUP_MKDIR -p /home/luis/.ssh/
+#touch /home/luis/.ssh/known_hosts
+#if [ ! -n "$(grep "^github.com " /home/luis/.ssh/known_hosts)" ]; then ssh-keyscan github.com >> /home/luis/.ssh/known_hosts 2>/dev/null; fi
+#if [ ! -n "$(grep "^gitlab.com " /home/luis/.ssh/known_hosts)" ]; then ssh-keyscan gitlab.com >> /home/luis/.ssh/known_hosts 2>/dev/null; fi
 
 # ZSH Plugin: zsh-autosuggestions
 ZSH_PLUGIN_DIR="/home/luis/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
