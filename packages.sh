@@ -144,6 +144,7 @@ PACKAGES+="
 	lshw
 	openssh
 	openssl
+	pkgfile
 "
 AURPACKAGES+="
 	blender-benchmark
