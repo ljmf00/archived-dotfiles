@@ -262,6 +262,8 @@ if ! [ -x "$(command -v yay)" ]; then
 fi
 
 echo "Installing common AUR packages..."
+mkdir -p /home/luis/.config/
+chown luis:wheel -R /home/luis/.config/
 sudo -u luis yay -S ${SETUP_AURPACKAGELIST} --needed --noconfirm > $SETUP_OUTPUT_DESCRIPTOR
 
 echo "Restructure sudo permissions..."
