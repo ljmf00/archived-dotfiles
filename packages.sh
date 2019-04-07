@@ -142,6 +142,8 @@ PACKAGES+="
 	gzip
 	ccache
 	lshw
+	openssh
+	openssl
 "
 AURPACKAGES+="
 	blender-benchmark
