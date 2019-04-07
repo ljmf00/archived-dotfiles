@@ -154,7 +154,7 @@ AURPACKAGES+="
 PACKAGES+="
 	gimp
 	krita
-	xournal
+	xournalpp
 	calligra
 	blender
 	inkscape
