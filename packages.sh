@@ -86,9 +86,9 @@ PACKAGES+="
 	speedcrunch
 	galculator
 "
-AURPACKAGES+="
-	wps-office
-"
+#AURPACKAGES+="
+#	wps-office
+#"
 #wps-office-extension-portuguese-dictionary
 
 # TODO: Check for virtualbox instance
