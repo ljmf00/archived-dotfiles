@@ -109,7 +109,7 @@ if [ "$SETUP_HOSTNAME" != "dummy" ]; then
     
     echo "Formating partitions..."
     mkfs.vfat -F 32 "${SETUP_DEVICE}1"
-    mkfs.btrfs "${SETUP_DEVICE}2"
+    mkfs.btrfs -f "${SETUP_DEVICE}2"
     mkswap "${SETUP_DEVICE}3"
 
     echo "Mouting the disk..."
@@ -132,7 +132,7 @@ else
 
     echo "Formating partitions..."
     mkfs.ext2 "${SETUP_DEVICE}1"
-    mkfs.btrfs "${SETUP_DEVICE}2"
+    mkfs.btrfs -f "${SETUP_DEVICE}2"
     mkswap "${SETUP_DEVICE}3"
 
     echo "Mouting the disk..."

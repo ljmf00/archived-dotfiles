@@ -41,7 +41,7 @@ echo -e "changeme\nchangeme" | passwd luis
 
 echo "Installing grub..."
 pacman -S grub os-prober intel-ucode --noconfirm
-if [ $SETUP_HOSTNAME -ne "dummy" ]; then
+if [ "$SETUP_HOSTNAME" != "dummy" ]; then
     pacman -S efibootmgr --noconfirm
     grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id="Arch Linux"
 else
@@ -58,7 +58,7 @@ chmod +x /misc/dotfiles/update-dotfiles.sh
 chown luis:luis -Rv /misc/
 
 pushd /misc/dotfiles/
-/misc/dotfiles/update-dotfiles.sh
+bash /misc/dotfiles/update-dotfiles.sh
 popd
 
 rm -rfv /misc/
