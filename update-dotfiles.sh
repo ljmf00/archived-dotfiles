@@ -176,8 +176,12 @@ source ./packages.sh
 echo -e "\e[92m-->\e[0m \e[1mInstalling common packages...\e[0m"
 pacman -S ${SETUP_PACKAGELIST} --needed --noconfirm > $SETUP_OUTPUT_DESCRIPTOR
 
+echo -e "\e[92m-->\e[0m \e[1mConfigure lightdm...\e[0m"
 # TODO: Update lightdm configs
 systemctl enable lightdm
+
+echo -e "\e[92m-->\e[0m \e[1mConfigure openssh...\e[0m"
+systemctl enable sshd
 
 echo -e "\e[92m-->\e[0m \e[1mUpdate .config permissions...\e[0m"
 chown luis:wheel -R /home/luis/.config/
