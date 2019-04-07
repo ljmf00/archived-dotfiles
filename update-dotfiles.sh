@@ -115,8 +115,6 @@ echo "root ALL=(ALL) ALL" > /etc/sudoers
 echo "luis ALL = NOPASSWD : ALL" >> /etc/sudoers
 echo "%wheel ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
-# TODO: Update lightdm configs
-
 # TODO: Fix Tilix command
 # Configure Tilix
 #sudo -u luis -n bash -c "dconf load /com/gexperts/Tilix/ < ./common/configs/tilix/tilix.dconf" > $SETUP_OUTPUT_DESCRIPTOR
@@ -177,6 +175,9 @@ source ./packages.sh
 
 echo -e "\e[92m-->\e[0m \e[1mInstalling common packages...\e[0m"
 pacman -S ${SETUP_PACKAGELIST} --needed --noconfirm > $SETUP_OUTPUT_DESCRIPTOR
+
+# TODO: Update lightdm configs
+systemctl enable lightdm
 
 # Install vscode configs
 echo -e "\e[92m-->\e[0m \e[1mInstalling vscode packages...\e[0m"
