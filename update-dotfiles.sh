@@ -95,7 +95,7 @@ $SETUP_MKDIR -p /home/luis/.gnupg/ > $SETUP_OUTPUT_DESCRIPTOR
 $SETUP_CP -rf ./common/configs/gnupg/gpg.conf /etc/pacman.d/gnupg/ > $SETUP_OUTPUT_DESCRIPTOR
 $SETUP_CP -rf ./common/configs/gnupg/gpg.conf /root/.gnupg/ > $SETUP_OUTPUT_DESCRIPTOR
 $SETUP_CP -rf ./common/configs/gnupg/gpg.conf /home/luis/.gnupg/ > $SETUP_OUTPUT_DESCRIPTOR
-
+chown luis:wheel -R /home/luis/.gnupg/ > $SETUP_OUTPUT_DESCRIPTOR
 
 echo -e "\e[92m-->\e[0m \e[1mConfigure GTK...\e[0m"
 $SETUP_MKDIR -p /home/luis/.config/gtk-3.0/ > $SETUP_OUTPUT_DESCRIPTOR
@@ -178,6 +178,9 @@ pacman -S ${SETUP_PACKAGELIST} --needed --noconfirm > $SETUP_OUTPUT_DESCRIPTOR
 
 # TODO: Update lightdm configs
 systemctl enable lightdm
+
+echo -e "\e[92m-->\e[0m \e[1mUpdate .config permissions...\e[0m"
+chown luis:wheel -R /home/luis/.config/
 
 # Install vscode configs
 echo -e "\e[92m-->\e[0m \e[1mInstalling vscode packages...\e[0m"
@@ -262,8 +265,6 @@ if ! [ -x "$(command -v yay)" ]; then
 fi
 
 echo "Installing common AUR packages..."
-mkdir -p /home/luis/.config/
-chown luis:wheel -R /home/luis/.config/
 sudo -u luis yay -S ${SETUP_AURPACKAGELIST} --needed --noconfirm > $SETUP_OUTPUT_DESCRIPTOR
 
 echo "Restructure sudo permissions..."
@@ -281,7 +282,7 @@ fi
 echo -e "\e[92m-->\e[0m \e[1mUpdating font cache...\e[0m"
 fc-cache -f > $SETUP_OUTPUT_DESCRIPTOR
 
-echo -e "\e[92m-->\e[0m \e[1mUpdate permissions...\e[0m"
+echo -e "\e[92m-->\e[0m \e[1mUpdate home permissions...\e[0m"
 chown luis:wheel -R /home/luis/ > $SETUP_OUTPUT_DESCRIPTOR
 
 echo -e "\e[95m-->\e[0m \e[1mDotfiles updated\e[0m"
