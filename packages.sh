@@ -9,13 +9,10 @@ PACKAGES+="
 	lightdm
 	lightdm-gtk-greeter
 	lightdm-gtk-greeter-settings
-	conky
 	i3-gaps
 	rofi
 	xsel
 	compton
-	qt5-base
-	gtk2
 	gtk3
 	papirus-icon-theme
 "
@@ -59,6 +56,7 @@ AURPACKAGES+="
 	ttf-wps-fonts
 	ttf-ms-fonts
 	nerd-fonts-complete
+	nerd-fonts-dejavu-complete
 "
 
 # Add common apps
@@ -68,7 +66,6 @@ PACKAGES+="
 
 # Add common text editors
 PACKAGES+="
-	vim
 	neovim
 	neovim-qt
 	python-neovim
@@ -95,9 +92,6 @@ PACKAGES+="
 
 # Add common development packages
 PACKAGES+="
-	intellij-idea-community-edition
-	eclipse-java
-	arduino
 	dlang
 	vulkan-devel
 	jdk-openjdk
@@ -128,7 +122,6 @@ PACKAGES+="
 	iotop
 	zsh
 	thefuck
-	tilix
 	vlc
 	wine
 	gparted
@@ -139,6 +132,7 @@ PACKAGES+="
 	xz
 	pigz
 	gzip
+	kitty
 	ccache
 	lshw
 	openssh
@@ -153,7 +147,6 @@ PACKAGES+="
 	feh
 "
 AURPACKAGES+="
-	blender-benchmark
 	oh-my-zsh-git
 	pamac-aur
 	discord
@@ -166,7 +159,6 @@ PACKAGES+="
 	krita
 	xournalpp
 	calligra
-	blender
 	inkscape
 "
 
@@ -199,11 +191,11 @@ PACKAGES+="
 "
 
 # Games
-AURPACKAGES+="
-	minecraft-launcher
-"
+# AURPACKAGES+="
+# 	minecraft-launcher
+# "
 
-if [ "$SETUP_HOSTNAME" = "deimos" ]; then
+if [[ "$SETUP_HOSTNAME" == "deimos" ]]; then
 	AURPACKAGES+="
 		kvkbd
 	"
