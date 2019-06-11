@@ -65,6 +65,10 @@ $SETUP_MKDIR -p /home/luis/.config/ > $SETUP_OUTPUT_DESCRIPTOR
 echo -e "\e[92m-->\e[0m \e[1mAdd wallpapers\e[0m"
 $SETUP_CP -rf ./common/wallpapers/ /home/luis/ > $SETUP_OUTPUT_DESCRIPTOR
 
+# Configure screenshots folder
+echo -e "\e[92m-->\e[0m \e[1mConfigure screenshots folder\e[0m"
+$SETUP_MKDIR -p /home/luis/Pictures/Screenshots > $SETUP_OUTPUT_DESCRIPTOR
+
 # Git configuration
 echo -e "\e[92m-->\e[0m \e[1mAdd git config...\e[0m"
 $SETUP_CP -rf ./common/configs/git/.gitconfig /home/luis/ > $SETUP_OUTPUT_DESCRIPTOR
@@ -151,6 +155,22 @@ else
 	git clone https://github.com/zsh-users/zsh-autosuggestions.git "$ZSH_PLUGIN_DIR" > $SETUP_OUTPUT_DESCRIPTOR
 fi
 
+
+# ZSH Plugin: zsh-wakatime
+ZSH_PLUGIN_DIR="/home/luis/.oh-my-zsh/custom/plugins/zsh-wakatime"
+if [ -d "$ZSH_PLUGIN_DIR" ]; then
+	# Updating
+	echo -e "\e[92m-->\e[0m \e[1mUpdating zsh-wakatime plugin...\e[0m"
+	pushd "$ZSH_PLUGIN_DIR" > $SETUP_OUTPUT_DESCRIPTOR
+	git pull > $SETUP_OUTPUT_DESCRIPTOR
+	popd > $SETUP_OUTPUT_DESCRIPTOR
+else
+	# Installing
+	echo -e "\e[92m-->\e[0m \e[1mInstalling zsh-wakatime plugin...\e[0m"
+	git clone https://github.com/wbingli/zsh-wakatime.git "$ZSH_PLUGIN_DIR" > $SETUP_OUTPUT_DESCRIPTOR
+fi
+
+
 # ZSH Plugin: zsh-syntax-highlighting
 ZSH_PLUGIN_DIR="/home/luis/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
 if [ -d "$ZSH_PLUGIN_DIR" ]; then
@@ -175,6 +195,9 @@ source ./packages.sh
 
 echo -e "\e[92m-->\e[0m \e[1mInstalling common packages...\e[0m"
 pacman -S ${SETUP_PACKAGELIST} --needed --noconfirm > $SETUP_OUTPUT_DESCRIPTOR
+
+# TODO: add i3 configs
+npm i -g i3-cycle-focus
 
 echo -e "\e[92m-->\e[0m \e[1mUpdate pkgfile repository...\e[0m"
 pkgfile --update

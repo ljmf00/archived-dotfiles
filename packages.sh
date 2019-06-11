@@ -6,17 +6,14 @@ AURPACKAGES=""
 
 # Add common graphical apps and themes
 PACKAGES+="
-	plasma
-	kde-applications
-	plasma-wayland-session
 	lightdm
 	lightdm-gtk-greeter
+	lightdm-gtk-greeter-settings
 	conky
 	i3-gaps
-	i3lock
-	bspwm
-	sxhkd
-	dmenu
+	rofi
+	xsel
+	compton
 	qt5-base
 	gtk2
 	gtk3
@@ -25,6 +22,9 @@ PACKAGES+="
 AURPACKAGES+="
 	osx-arc-shadow
 	captain-frank-cursors-git
+	rofimoji-git
+	i3lock-color
+	betterlockscreen
 "
 
 # Add common graphics interface packages and drivers
@@ -114,10 +114,9 @@ PACKAGES+="
 	make
 	radare2
 	radare2-cutter
+	npm
 "
 AURPACKAGES+="
-	intellij-idea-ultimate-edition
-	android-studio
 	vmware-workstation
 	vmware-tools
 "
@@ -145,12 +144,20 @@ PACKAGES+="
 	openssh
 	openssl
 	pkgfile
+	polkit-gnome
+	gnome-keyring
+	playerctl
+	network-manager-applet
+	screenfetch
+	scrot
+	feh
 "
 AURPACKAGES+="
 	blender-benchmark
 	oh-my-zsh-git
 	pamac-aur
 	discord
+	polybar
 "
 
 # Add common design and handwriting utilities
