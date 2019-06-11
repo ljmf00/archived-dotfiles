@@ -1,3 +1,21 @@
 [user]
 	email = contact@lsferreira.net
 	name = Luís Ferreira
+
+[core]
+	editor = micro
+
+[color]
+	ui = true
+
+[gpg]
+	program = gpg2
+
+[commit]
+	gpgsign = true
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

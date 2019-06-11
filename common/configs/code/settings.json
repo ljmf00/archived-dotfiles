@@ -49,6 +49,5 @@
 	"zenMode.hideStatusBar": false,
 	"zenMode.centerLayout": false,
 	"d.dubPath": "/home/luis/.local/share/code-d/bin/dub",
-	"d.servedPath": "/home/luis/.local/share/code-d/bin/serve-d",
-	"editor.smoothScrolling": true
+	"d.servedPath": "/home/luis/.local/share/code-d/bin/serve-d"
 }
