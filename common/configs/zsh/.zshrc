@@ -37,7 +37,7 @@ ZSH_THEME="ljmf00"
 ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -52,11 +52,20 @@ ENABLE_CORRECTION="true"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+VSCODE=code-oss
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+	git
+	bundler
+	vscode
+	virtualenv
+	sudo
+	svn
+)
 
 # User configuration
 
@@ -70,9 +79,9 @@ source $ZSH/oh-my-zsh.sh
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-    export EDITOR='nano'
+    export EDITOR='micro'
 else
-    export EDITOR='emacs'
+    export EDITOR='micro'
 fi
 
 # Compilation flags
@@ -89,12 +98,16 @@ fi
 # Example aliases
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias zshconfig="$EDITOR ~/.zshrc"
+alias chat="tmux -L weechat attach"
+alias waka="npx waka"
+alias xorgssh="ssh -YC"
 
 autoload bashcompinit 
 bashcompinit
 
 source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.oh-my-zsh/custom/plugins/zsh-wakatime/zsh-wakatime.plugin.zsh
 
 source ~/supershell.sh
 eval $(thefuck --alias)
@@ -110,7 +123,7 @@ if [[ "$SSH_AGENT_PID" == "" ]]; then
     eval "$(<~/.ssh-agent-thing)" > /dev/null
 fi
 
-export VISUAL='nano'
+export VISUAL='micro'
 
 export USE_CCACHE=1
 export WITH_SU=true
@@ -129,6 +142,13 @@ export CCACHE_COMPRESS=1
 #ccache -M 50G
 
 setopt shwordsplit
+autoload -Uz compinit
+compinit
+# Completion for kitty
+kitty + complete setup zsh | source /dev/stdin
+
+# Kitty workarrounds
+#alias micro='TERM=xterm-truecolor micro'
 
 #IRONIC_WM_NAME="LG3D"
 #NET_WIN=$(xprop -root _NET_SUPPORTING_WM_CHECK | awk -F "# " '{print $2}')

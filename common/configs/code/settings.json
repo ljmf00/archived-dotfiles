@@ -1,10 +1,9 @@
-// Place your settings in this file to overwrite the default settings
 {
 	"editor.fontFamily": "DejaVu Sans Mono",
 	"editor.fontSize": 15,
 	"editor.insertSpaces": false,
 	"editor.formatOnType": true,
-	"editor.tabCompletion": true,
+	"editor.tabCompletion": "on",
 	"editor.cursorBlinking": "smooth",
 	"editor.mouseWheelZoom": true,
 	"editor.cursorStyle": "block",
@@ -40,7 +39,6 @@
 	"discord.silent": true,
 	"discord.workspaceElapsedTime": true,
 	"gitlens.keymap": "alternate",
-	"vsicons.presets.hideFolders": true,
 	"guides.enabled": false,
 	"material-icon-theme.showWelcomeMessage": false,
 	"workbench.sideBar.location": "left",
@@ -48,6 +46,76 @@
 	"editor.minimap.enabled": true,
 	"zenMode.hideStatusBar": false,
 	"zenMode.centerLayout": false,
+	"zenMode.hideLineNumbers": false,
 	"d.dubPath": "/home/luis/.local/share/code-d/bin/dub",
-	"d.servedPath": "/home/luis/.local/share/code-d/bin/serve-d"
+	"d.servedPath": "/home/luis/.local/share/code-d/bin/serve-d",
+	"editor.smoothScrolling": true,
+	"editor.matchBrackets": false,
+	"editor.suggestSelection": "first",
+	"vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+	"C_Cpp.updateChannel": "Insiders",
+	"liveshare.featureSet": "stable",
+	"python.jediEnabled": false,
+	"phpserver.ip": "0.0.0.0",
+	"phpserver.port": 8080,
+	"editor.rulers": [80],
+	"peacock.favoriteColors": [
+		{
+			"name": "Angular Red",
+			"value": "#b52e31"
+		},
+		{
+			"name": "Auth0 Orange",
+			"value": "#eb5424"
+		},
+		{
+			"name": "Azure Blue",
+			"value": "#007fff"
+		},
+		{
+			"name": "C# Purple",
+			"value": "#68217A"
+		},
+		{
+			"name": "Gatsby Purple",
+			"value": "#639"
+		},
+		{
+			"name": "Go Cyan",
+			"value": "#5dc9e2"
+		},
+		{
+			"name": "Java Blue-Gray",
+			"value": "#557c9b"
+		},
+		{
+			"name": "JavaScript Yellow",
+			"value": "#f9e64f"
+		},
+		{
+			"name": "Mandalorian Blue",
+			"value": "#1857a4"
+		},
+		{
+			"name": "Node Green",
+			"value": "#215732"
+		},
+		{
+			"name": "React Blue",
+			"value": "#00b3e6"
+		},
+		{
+			"name": "Something Different",
+			"value": "#832561"
+		},
+		{
+			"name": "Vue Green",
+			"value": "#42b883"
+		}
+	],
+	"breadcrumbs.enabled": true,
+	"workbench.editor.showTabs": true,
+	"mesonbuild.configureOnOpen": false,
+	"explorer.confirmDragAndDrop": false,
+	"workbench.iconTheme": "vscode-icons"
 }

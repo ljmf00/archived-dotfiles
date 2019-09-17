@@ -151,6 +151,7 @@ AURPACKAGES+="
 	pamac-aur
 	discord
 	polybar
+	i3-battery-popup-git
 "
 
 # Add common design and handwriting utilities

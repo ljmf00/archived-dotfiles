@@ -1,4 +1,3 @@
-// Place your key bindings in this file to overwrite the defaults
 [
 	{
 		"key": "ctrl+alt+`",
@@ -31,5 +30,25 @@
 	{
 		"key": "ctrl+k ctrl+shift+f",
 		"command": "editor.action.format"
+	},
+	{
+		"key": "shift+alt+w",
+		"command": "workbench.action.toggleTabsVisibility"
+	},
+	{
+		"key": "ctrl+meta+w",
+		"command": "-workbench.action.toggleTabsVisibility"
+	},
+	{
+		"key": "ctrl+shift+q",
+		"command": "editor.action.fontZoomReset"
+	},
+	{
+		"key": "ctrl+k `",
+		"command": "workbench.action.quickOpenTerm"
+	},
+	{
+		"key": "ctrl+k n",
+		"command": "explorer.newFile"
 	}
 ]

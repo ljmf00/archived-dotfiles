@@ -4,8 +4,8 @@ font-1 = Noto Sans Symbols2:size=10:style=Regular;+2
 font-2 = DejaVu Sans:size=10:style=Regular;+2
 
 monitor=${env:MONITOR:}
-modules-right = battery backlight pulseaudio date time
-modules-left = i3
+modules-right = battery cpu memory date time
+modules-left = i3 backlight pulseaudio
 modules-center = title
 width = 100%
 height = 18
@@ -195,7 +195,8 @@ ramp-load-7 = █
 [module/memory]
 type = internal/memory
 format = %{F#ff922b}<label> %{F#a3be8c}<ramp-used>
-label = RAM %gb_used%/%gb_total%
+;label = RAM %gb_used%/%gb_total%
+label = RAM %percentage_used%%
 
 ramp-used-0 = ▁
 ramp-used-1 = ▂
